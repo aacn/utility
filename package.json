@@ -10,7 +10,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "private": false,
   "engines": {
@@ -21,7 +21,7 @@
     "last 3 versions",
     "> 1%"
   ],
-  "main": "dist/index.cjs.js",
+  "main": "dist/index.cjs",
   "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",
   "files": [
