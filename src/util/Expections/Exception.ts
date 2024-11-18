@@ -9,7 +9,7 @@ class NativeException extends Error {
 
   constructor(code: HttpStatus, message: string) {
     super(message);
-    this.name = 'ShophubError';
+    this.name = 'NativeError';
     this.code = code;
   }
 }
