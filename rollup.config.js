@@ -45,9 +45,9 @@ const config = [
     ],
     output: [
       // Outputs the packaged lib in CommonJS format
-      { file: pkg.main, format: 'cjs', plugins: [flatDts()] },
+      { file: pkg.main, format: 'cjs', plugins: [flatDts()], exports: 'named' },
       // Outputs the packaged lib in ES Module format
-      { file: pkg.module, format: 'esm', plugins: [flatDts()] },
+      { file: pkg.module, format: 'esm', plugins: [flatDts()], exports: 'named' },
     ],
   },
 ];

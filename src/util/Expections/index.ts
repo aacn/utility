@@ -3,9 +3,69 @@ import { HttpException, HttpStatus } from '@nestjs/common';
 import { PostgresError } from '@/types/enums/PostgresError';
 import { NativeException } from '@/util/Expections/Exception';
 import { PgException } from '@/util/Expections/PgException';
-import { getHttpStatusText } from '@/util/getHttpStatusText';
+
+const statusMap: { [key: number]: string } = {
+  100: 'Continue',
+  101: 'Switching Protocols',
+  102: 'Processing',
+  103: 'Early Hints',
+  200: 'OK',
+  201: 'Created',
+  202: 'Accepted',
+  203: 'Non-Authoritative Information',
+  204: 'No Content',
+  205: 'Reset Content',
+  206: 'Partial Content',
+  300: 'Multiple Choices',
+  301: 'Moved Permanently',
+  302: 'Found',
+  303: 'See Other',
+  304: 'Not Modified',
+  307: 'Temporary Redirect',
+  308: 'Permanent Redirect',
+  400: 'Bad Request',
+  401: 'Unauthorized',
+  402: 'Payment Required',
+  403: 'Forbidden',
+  404: 'Not Found',
+  405: 'Method Not Allowed',
+  406: 'Not Acceptable',
+  407: 'Proxy Authentication Required',
+  408: 'Request Timeout',
+  409: 'Conflict',
+  410: 'Gone',
+  411: 'Length Required',
+  412: 'Precondition Failed',
+  413: 'Payload Too Large',
+  414: 'URI Too Long',
+  415: 'Unsupported Media Type',
+  416: 'Requested Range Not Satisfiable',
+  417: 'Expectation Failed',
+  418: "I'm a Teapot",
+  421: 'Misdirected Request',
+  422: 'Unprocessable Entity',
+  424: 'Failed Dependency',
+  428: 'Precondition Required',
+  429: 'Too Many Requests',
+  500: 'Internal Server Error',
+  501: 'Not Implemented',
+  502: 'Bad Gateway',
+  503: 'Service Unavailable',
+  504: 'Gateway Timeout',
+  505: 'HTTP Version Not Supported',
+};
 
 class Exceptions {
+  private static getHttpStatusText(statusCode: number): string {
+    const statusText = statusMap[statusCode];
+
+    if (!statusText) {
+      return 'Error';
+    }
+
+    return statusText;
+  }
+
   /**
    * Evaluates a thrown postgres error object, which is then sanitized into an appropriate NativeError object.
    * @param error a postgres error that, for example is from a rejected promise.
@@ -55,7 +115,7 @@ class Exceptions {
       {
         status: _error.code,
         message: _error.message,
-        error: getHttpStatusText(_error.code),
+        error: this.getHttpStatusText(_error.code),
       },
       _error.code
     );
