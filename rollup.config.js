@@ -16,7 +16,7 @@ const config = [
     input: 'src/index.ts',
     external: Object.keys(pkg.peerDependencies || {}),
     plugins: [
-      del({ targets: ['dist/*', 'playground/src/component-lib/*'] }),
+      del({ targets: ['dist/*'] }),
       nodeResolve(),
       typescriptPaths({
         preserveExtensions: true,
