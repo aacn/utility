@@ -1,7 +1,7 @@
 import { HttpStatus } from '@nestjs/common';
 
 /**
- * Custom exceptipn object used by Native Systems, which extends the Error interface
+ * Custom exception object used by Native Systems, which extends the Error interface
  * and adds the 'code' attribute, to be able to provide an additional httpStatus.
  */
 class NativeException extends Error {
