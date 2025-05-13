@@ -1,5 +1,5 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
-
+import { HttpException } from '@nestjs/common';
+import { HttpStatus } from '@/types/enums/HttpStatus';
 import { PostgresError } from '@/types/enums/PostgresError';
 import { NativeException } from '@/util/Expections/Exception';
 import { PgException } from '@/util/Expections/PgException';
@@ -55,6 +55,9 @@ const statusMap: { [key: number]: string } = {
   505: 'HTTP Version Not Supported',
 };
 
+/**
+ * Use in Node.js context only!
+ */
 class Exceptions {
   private static getHttpStatusText(statusCode: number): string {
     const statusText = statusMap[statusCode];

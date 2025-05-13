@@ -1,4 +1,4 @@
-import { HttpStatus } from '@nestjs/common';
+import { HttpStatus } from '@/types/enums/HttpStatus';
 
 /**
  * Custom exception object used by Native Systems, which extends the Error interface

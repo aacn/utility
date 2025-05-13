@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.6] - 2025-05-13
+
+### Changed
+
+- Removed nestjs imports for `NativeException` for them to be able to be used in a client context.
+
 ## [1.0.5] - 2024-11-18
 
 ### Removed
