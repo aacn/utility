@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.3.0] - 2025-08-14
+
+### Added
+
+- Added url-template parser
+- Added date formatter
+- Added utility types
+
 ## [1.2.0] - 2025-05-14
 
 ### Added
