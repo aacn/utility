@@ -1,5 +1,5 @@
-# Native system utility package
-This package contains utility functions and types, which are used across native system software projects.
+# Native systems utility package
+This package contains utility functions and types, which are used across native systems (https://aacn.eu) software projects.
 
 ## Steps to deploy new version
 1. Update package version.
