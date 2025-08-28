@@ -1,4 +1,4 @@
-declare namespace Native {
+declare namespace native {
   type Error = ErrorConstructor & {
     status: number;
     message: string;
@@ -12,4 +12,4 @@ declare namespace Native {
   export { Error, ErrorResponse };
 }
 
-export type { Native };
+export type { native };

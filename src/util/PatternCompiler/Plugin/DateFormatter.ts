@@ -77,4 +77,54 @@ export class DateFormatter {
       year: 'numeric',
     }).format(validDate);
   }
+
+  static getZoneAdjustedWeekday = (
+    dateString: string,
+    options: {
+      timezone: string;
+      locale: string | undefined;
+    }
+  ) => {
+    const timezone = options.timezone;
+
+    return new Date(dateString).toLocaleDateString(options.locale, {
+      weekday: 'long',
+      timeZone: timezone,
+    });
+  };
+
+  static getZoneAdjustedDate = (
+    dateString: string,
+    options: {
+      timezone: string;
+      locale: string | undefined;
+    }
+  ) => {
+    const timezone = options.timezone;
+
+    return new Date(dateString).toLocaleDateString(options.locale, {
+      month: 'long',
+      day: 'numeric',
+      timeZone: timezone,
+    });
+  };
+
+  static getZoneAdjustedTime = (
+    dateString: string,
+    options: {
+      timezone: string;
+      locale: string | undefined;
+    }
+  ) => {
+    const timezone = options.timezone;
+
+    return new Date(dateString)
+      .toLocaleTimeString(options.locale, {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+        timeZone: timezone,
+      })
+      .replace(/^0/, '');
+  };
 }
