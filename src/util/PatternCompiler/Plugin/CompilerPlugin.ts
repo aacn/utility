@@ -1,4 +1,4 @@
-export type CompilerPlugin<T> = (
+export type CompilerPlugin<T = void> = (
   handlebars: typeof Handlebars,
-  data: T
+  ...args: [T] extends [void] ? [] : [data: T]
 ) => void;

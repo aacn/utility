@@ -1,7 +1,7 @@
 import { CompilerPlugin } from '@/util/PatternCompiler/Plugin/CompilerPlugin';
 import Handlebars from 'handlebars';
 
-export const stringPlugin: CompilerPlugin<never> = (handlebars) => {
+export const stringPlugin: CompilerPlugin = (handlebars) => {
   handlebars.registerHelper(
     'subString',
     function (passedString: string | null, start: number, end: number) {

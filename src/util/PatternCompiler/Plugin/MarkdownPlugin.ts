@@ -6,7 +6,7 @@ import { type CompilerPlugin } from '@/util/PatternCompiler/Plugin/CompilerPlugi
 
 const mdParser = new MarkdownIt();
 
-export const markdownPlugin: CompilerPlugin<never> = (handlebars) => {
+export const markdownPlugin: CompilerPlugin = (handlebars) => {
   handlebars.registerHelper('md', function (markdownText: string) {
     if (!markdownText) return '';
 
