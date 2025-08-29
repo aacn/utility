@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.0] - 2025-08-29
+
+### Added
+
+- Added a PatternCompiler
+
+### Changed
+
+- BREAKING: Changed the name of the namespace from **Native** -> **native** to properly match the organization name.
+
+### Fixed
+
+- Fixed typos
+
 ## [1.3.0] - 2025-08-14
 
 ### Added
