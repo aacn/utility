@@ -5,7 +5,7 @@
   "homepage": "https://github.com/aacn/utility#readme",
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com:aacn/utility.git"
+    "url": "git+ssh://git@github.com/aacn/utility.git"
   },
   "publishConfig": {
     "access": "public"
@@ -62,8 +62,7 @@
       "main"
     ]
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-json": "^4.1.0",
