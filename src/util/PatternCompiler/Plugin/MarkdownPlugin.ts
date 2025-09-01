@@ -1,5 +1,5 @@
 import Handlebars from 'handlebars';
-import sanitizeHtml, { simpleTransform } from 'sanitize-html';
+import sanitizeHtml from 'sanitize-html';
 import MarkdownIt from 'markdown-it';
 
 import { type CompilerPlugin } from '@/util/PatternCompiler/Plugin/CompilerPlugin';
@@ -20,7 +20,7 @@ export const markdownPlugin: CompilerPlugin = (handlebars) => {
       },
       // enforce target="_blank" on links
       transformTags: {
-        a: simpleTransform('a', {
+        a: sanitizeHtml.simpleTransform('a', {
           target: '_blank',
           rel: 'noopener',
         }),
