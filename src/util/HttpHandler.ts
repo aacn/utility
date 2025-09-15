@@ -33,7 +33,7 @@ class HttpHandler {
 
   /**
    * Http request error handler, that always returns the correct error object.
-   * Either fast forwards the already correctly formatted naive error or set up a new native error, based on the provided info.
+   * Either fast forwards the already correctly formatted native error or set up a new native error, based on the provided info.
    * The generic typing is just used to prevent type errors.
    * @param response {Response | native.ErrorResponse} The Response object that errored. Can either be a default object, or the modified native version.
    * @throws {native.Error} Always throws an error, which is always of this type.
