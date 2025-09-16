@@ -1,4 +1,3 @@
-import type { native } from '@/types/native';
 import type { Paginated } from '@/types/Paginated';
 import type { CancelableComponent } from '@/types/CancelableComponent';
 import type { CRUDCompontent } from '@/types/CRUDCompontent';
@@ -7,11 +6,29 @@ import type {
   DirectUseStateComponent,
 } from '@/types/UseStateComponent';
 
+import { HttpStatus, PostgresError } from './enums';
+
+declare namespace native {
+  type Error = ErrorConstructor & {
+    status: number;
+    message: string;
+    error: string;
+  };
+
+  interface ErrorResponse extends Response {
+    isNativeError: boolean;
+  }
+
+  export { Error, ErrorResponse };
+}
+
 export {
-  native,
+  type native,
   Paginated,
   CancelableComponent,
   CRUDCompontent,
   UseStateComponent,
   DirectUseStateComponent,
+  HttpStatus,
+  PostgresError,
 };

@@ -1,6 +1,6 @@
 import { logger } from '@/util/Logger';
-import { native } from '@/types';
-import { NativeException } from 'util/Exceptions';
+import { HttpStatus, native } from '@/types';
+import { NativeException } from '@/util/Exceptions';
 
 class HttpHandler {
   /**
@@ -50,7 +50,7 @@ class HttpHandler {
     } else {
       logger.error('Request failed because of a network error.');
       const nativeError = new NativeException(
-        500,
+        HttpStatus.NOT_IMPLEMENTED,
         response.toString() ??
           'Request failed for unknown reason. (Network error)'
       );

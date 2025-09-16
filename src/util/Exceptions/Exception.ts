@@ -1,4 +1,4 @@
-import { HttpStatus } from '@/types/enums/HttpStatus';
+import { HttpStatus } from '@/types';
 
 /**
  * Custom exception object used by Native Systems, which extends the Error interface

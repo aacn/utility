@@ -1,2 +1,2 @@
-export * from '@/types/enums';
+export * from '@/types';
 export * from '@/util';
