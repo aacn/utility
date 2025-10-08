@@ -31,7 +31,9 @@ class PgException extends Error {
    * @returns The postgres error code that is associated with this exception.
    */
   getStatus(): PostgresError {
-    return this.err?.code ?? PostgresError.UNDEFINED_CODE;
+    return (
+      this.err?.cause?.code ?? this.err?.code ?? PostgresError.UNDEFINED_CODE
+    );
   }
 
   /**

@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.1.2] - 2025-10-08
+
+### Fixed
+
+- Fixed a bug that caused the `PgException` to not be able to interpret the pg-error correctly.
+
 ## [2.1.1] - 2025-09-16
 
 ### Fixed
