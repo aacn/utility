@@ -4,3 +4,8 @@ export * from './HttpHandler';
 export * from './CookieHelper';
 export * from './UrlTemplate';
 export * from './PatternCompiler';
+export * from './generatePrefix';
+export * from './LabelMapper';
+export * from './FormSanitizer';
+export * from './InfoFormatter';
+export * from './LocalizationHandler';
