@@ -10,7 +10,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "2.3.1",
+  "version": "2.3.2",
   "license": "MIT",
   "private": false,
   "engines": {
@@ -64,9 +64,7 @@
       "main"
     ]
   },
-  "dependencies": {
-    "string-to-color": "^2.2.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-json": "^4.1.0",

@@ -1,5 +1,3 @@
-import stc from 'string-to-color';
-
 export class InfoFormatter {
   static getName(
     firstName: string | undefined | null,
@@ -35,10 +33,6 @@ export class InfoFormatter {
   static getLetter(name: string | null | undefined): string | null {
     if (!name) return null;
     return name.charAt(0).toUpperCase();
-  }
-
-  static getBackgroundColor(email: string | undefined | null): string {
-    return stc(email);
   }
 
   static getInitial(name: string): string {
