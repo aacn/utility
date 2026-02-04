@@ -81,11 +81,12 @@ export class DateFormatter {
   static getZoneAdjustedWeekday = (
     dateString: string,
     options: {
-      timezone: string;
+      timezone: string | undefined;
       locale: string | undefined;
-    }
+    },
+    defaultTimeZone: string = 'Europe/Berlin'
   ) => {
-    const timezone = options.timezone;
+    const timezone = options.timezone ?? defaultTimeZone;
 
     return new Date(dateString).toLocaleDateString(options.locale, {
       weekday: 'long',
@@ -96,11 +97,12 @@ export class DateFormatter {
   static getZoneAdjustedDate = (
     dateString: string,
     options: {
-      timezone: string;
+      timezone: string | undefined;
       locale: string | undefined;
-    }
+    },
+    defaultTimeZone: string = 'Europe/Berlin'
   ) => {
-    const timezone = options.timezone;
+    const timezone = options.timezone ?? defaultTimeZone;
 
     return new Date(dateString).toLocaleDateString(options.locale, {
       month: 'long',
@@ -112,11 +114,12 @@ export class DateFormatter {
   static getZoneAdjustedTime = (
     dateString: string,
     options: {
-      timezone: string;
+      timezone: string | undefined;
       locale: string | undefined;
-    }
+    },
+    defaultTimeZone: string = 'Europe/Berlin'
   ) => {
-    const timezone = options.timezone;
+    const timezone = options.timezone ?? defaultTimeZone;
 
     return new Date(dateString)
       .toLocaleTimeString(options.locale, {
