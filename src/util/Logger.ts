@@ -17,8 +17,28 @@ export interface Logger {
 }
 
 const LOG_LEVEL: LogLevel = 'log';
+const LOG_STACKS = process.env.LOG_STACKS === '1';
 
 const NO_OP: LogFn = (_message?: any, ..._optionalParams: any[]) => undefined;
+
+const serializeArg = (arg: any) => {
+  if (arg instanceof Error) {
+    if (LOG_STACKS) return arg;
+    const data: Record<string, unknown> = {
+      name: arg.name,
+      message: arg.message,
+    };
+    if ((arg as any).code !== undefined) data.code = (arg as any).code;
+    return data;
+  }
+  return arg;
+};
+
+const wrap = (fn: LogFn): LogFn => {
+  return (message?: any, ...optionalParams: any[]) => {
+    fn(serializeArg(message), ...optionalParams.map(serializeArg));
+  };
+};
 
 class ConsoleLogger implements Logger {
   readonly log: LogFn;
@@ -31,26 +51,27 @@ class ConsoleLogger implements Logger {
   constructor(options?: { level?: LogLevel }) {
     const { level } = options || {};
 
-    this.error = console.error.bind(console);
+    this.error = wrap(console.error.bind(console));
     this.warn = NO_OP;
     this.log = NO_OP;
 
     switch (level) {
       case 'warn':
-        this.warn = console.warn.bind(console);
+        this.warn = wrap(console.warn.bind(console));
         break;
       case 'log':
-        this.warn = console.warn.bind(console);
-        this.log = console.log.bind(console);
+        this.warn = wrap(console.warn.bind(console));
+        this.log = wrap(console.log.bind(console));
         break;
     }
 
     this.dev =
       process.env.NODE_ENV === 'development'
-        ? console.log.bind(console)
+        ? wrap(console.log.bind(console))
         : NO_OP;
 
-    this.debug = process.env.DEBUG === '1' ? console.log.bind(console) : NO_OP;
+    this.debug =
+      process.env.DEBUG === '1' ? wrap(console.log.bind(console)) : NO_OP;
   }
 
   disable() {
@@ -63,25 +84,26 @@ class ConsoleLogger implements Logger {
 
   enable() {
     Object.defineProperty(this, 'error', {
-      value: console.error.bind(console),
+      value: wrap(console.error.bind(console)),
     });
     Object.defineProperty(this, 'warn', {
       value:
         LOG_LEVEL === 'warn' || LOG_LEVEL === 'log'
-          ? console.warn.bind(console)
+          ? wrap(console.warn.bind(console))
           : NO_OP,
     });
     Object.defineProperty(this, 'log', {
-      value: LOG_LEVEL === 'log' ? console.log.bind(console) : NO_OP,
+      value: LOG_LEVEL === 'log' ? wrap(console.log.bind(console)) : NO_OP,
     });
     Object.defineProperty(this, 'dev', {
       value:
         process.env.NODE_ENV === 'development'
-          ? console.log.bind(console)
+          ? wrap(console.log.bind(console))
           : NO_OP,
     });
     Object.defineProperty(this, 'debug', {
-      value: process.env.DEBUG === '1' ? console.log.bind(console) : NO_OP,
+      value:
+        process.env.DEBUG === '1' ? wrap(console.log.bind(console)) : NO_OP,
     });
   }
 }
