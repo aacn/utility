@@ -9,3 +9,4 @@ export * from './LabelMapper';
 export * from './FormSanitizer';
 export * from './InfoFormatter';
 export * from './LocalizationHandler';
+export * from './countryCodeToFlag';
