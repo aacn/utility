@@ -1,5 +1,22 @@
 export class DateFormatter {
   /**
+   * Safely converts date-like values into a valid Date object.
+   * Returns null when the input is empty or invalid.
+   */
+  static toDate(value: Date | string | null | undefined): Date | null {
+    if (!value) {
+      return null;
+    }
+
+    if (value instanceof Date) {
+      return Number.isNaN(value.getTime()) ? null : value;
+    }
+
+    const parsed = new Date(value);
+    return Number.isNaN(parsed.getTime()) ? null : parsed;
+  }
+
+  /**
    * Formats a date with time in German format
    * @param date Date object or date string to format
    * @returns Formatted date string
