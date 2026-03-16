@@ -17,6 +17,19 @@ export class DateFormatter {
   }
 
   /**
+   * Safely converts a date-string into a timestamp.
+   */
+  static toTimestamp(value: string | null | undefined): number | null {
+    if (!value) {
+      return null;
+    }
+
+    const parsed = new Date(value);
+    const time = parsed.getTime();
+    return Number.isNaN(time) ? null : time;
+  }
+
+  /**
    * Formats a date with time in German format
    * @param date Date object or date string to format
    * @returns Formatted date string
