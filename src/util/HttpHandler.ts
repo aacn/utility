@@ -6,6 +6,14 @@ import {
 } from '@/types';
 import { NativeException } from '@/util/Exceptions';
 
+const isNativeErrorResponse = (
+  response: unknown
+): response is NativeErrorResponse =>
+  typeof response === 'object' &&
+  response !== null &&
+  'isNativeError' in response &&
+  response.isNativeError === true;
+
 class HttpHandler {
   /**
    * Http request response handler, which checks if the given response is in status range 'ok'.
@@ -39,11 +47,11 @@ class HttpHandler {
    * Http request error handler, that always returns the correct error object.
    * Either fast forwards the already correctly formatted native error or set up a new native error, based on the provided info.
    * The generic typing is just used to prevent type errors.
-   * @param response {Response | native.ErrorResponse} The Response object that errored. Can either be a default object, or the modified native version.
+   * @param response {unknown} The value that caused the request to fail. Can either be a modified native response or a network error.
    * @throws {native.Error} Always throws an error, which is always of this type.
    */
-  public static error<T>(response: Response | NativeErrorResponse): Promise<T> {
-    if ('isNativeError' in response && response.isNativeError) {
+  public static error<T>(response: unknown): Promise<T> {
+    if (isNativeErrorResponse(response)) {
       return response.json().then((error: NativeError) => {
         logger.error('Request failed:', error.message);
 
@@ -51,10 +59,19 @@ class HttpHandler {
       });
     } else {
       logger.error('Request failed because of a network error.');
+      let message = 'Request failed for unknown reason. (Network error)';
+
+      if (response !== null && response !== undefined) {
+        try {
+          message = String(response);
+        } catch {
+          // Keep the default message for values that cannot be converted to a string.
+        }
+      }
+
       const nativeError = new NativeException(
         HttpStatus.NOT_IMPLEMENTED,
-        response.toString() ??
-          'Request failed for unknown reason. (Network error)'
+        message
       );
       return Promise.reject(nativeError);
     }
