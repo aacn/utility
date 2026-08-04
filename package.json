@@ -10,28 +10,29 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "2.5.2",
+  "version": "2.6.0",
   "license": "MIT",
   "private": false,
   "engines": {
     "npm": "please-use-yarn",
     "yarn": "1.x"
   },
-  "browserslist": [
-    "last 3 versions",
-    "> 1%"
-  ],
+  "browserslist": ["last 3 versions", "> 1%"],
   "main": "dist/index.cjs",
   "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "README.md"
-  ],
+  "files": ["dist", "README.md"],
   "exports": {
-    "import": "./dist/index.esm.js",
-    "require": "./dist/index.cjs",
-    "types": "./dist/index.d.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs"
+    },
+    "./pattern": {
+      "types": "./dist/pattern.d.ts",
+      "import": "./dist/pattern.esm.js",
+      "require": "./dist/pattern.cjs"
+    }
   },
   "type": "module",
   "scripts": {
@@ -46,6 +47,7 @@
     "prepare": "husky",
     "pre-format": "lint-staged",
     "test": "jest",
+    "test:types": "tsc --noEmit --target ES2022 --module NodeNext --moduleResolution NodeNext --types node type-tests/package-imports.ts",
     "test:watch": "jest --watch"
   },
   "lint-staged": {
@@ -53,16 +55,9 @@
       "prettier --config .prettierrc.json --write"
     ]
   },
-  "keywords": [
-    "typescript",
-    "react",
-    "next",
-    "utility"
-  ],
+  "keywords": ["typescript", "react", "next", "utility"],
   "release": {
-    "branches": [
-      "main"
-    ]
+    "branches": ["main"]
   },
   "dependencies": {},
   "devDependencies": {

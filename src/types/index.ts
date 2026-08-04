@@ -1,34 +1,24 @@
-import type { Paginated } from '@/types/Paginated';
-import type { CancelableComponent } from '@/types/CancelableComponent';
-import type { CRUDCompontent } from '@/types/CRUDCompontent';
-import type {
+export type { Paginated } from './Paginated';
+export type { CancelableComponent } from './CancelableComponent';
+export type { CRUDCompontent } from './CRUDCompontent';
+export type {
   UseStateComponent,
   DirectUseStateComponent,
-} from '@/types/UseStateComponent';
+} from './UseStateComponent';
+export { HttpStatus } from './enums/HttpStatus';
+export { PostgresError } from './enums/PostgresError';
 
-import { HttpStatus, PostgresError } from './enums';
+export type NativeError = ErrorConstructor & {
+  status: number;
+  message: string;
+  error: string;
+};
 
-declare namespace native {
-  type Error = ErrorConstructor & {
-    status: number;
-    message: string;
-    error: string;
-  };
-
-  interface ErrorResponse extends Response {
-    isNativeError: boolean;
-  }
-
-  export { Error, ErrorResponse };
+export interface NativeErrorResponse extends Response {
+  isNativeError: boolean;
 }
 
-export {
-  type native,
-  Paginated,
-  CancelableComponent,
-  CRUDCompontent,
-  UseStateComponent,
-  DirectUseStateComponent,
-  HttpStatus,
-  PostgresError,
-};
+export namespace native {
+  export type Error = NativeError;
+  export type ErrorResponse = NativeErrorResponse;
+}

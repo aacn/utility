@@ -1,5 +1,9 @@
 import { logger } from '@/util/Logger';
-import { HttpStatus, native } from '@/types';
+import {
+  HttpStatus,
+  type NativeError,
+  type NativeErrorResponse,
+} from '@/types';
 import { NativeException } from '@/util/Exceptions';
 
 class HttpHandler {
@@ -24,7 +28,7 @@ class HttpHandler {
     }
 
     // Not printing native error here, but in the error function instead, since body can only be consumed once. (via res.json())
-    const errorResponse: native.ErrorResponse = Object.assign(response, {
+    const errorResponse: NativeErrorResponse = Object.assign(response, {
       isNativeError: true,
     });
 
@@ -38,11 +42,9 @@ class HttpHandler {
    * @param response {Response | native.ErrorResponse} The Response object that errored. Can either be a default object, or the modified native version.
    * @throws {native.Error} Always throws an error, which is always of this type.
    */
-  public static error<T>(
-    response: Response | native.ErrorResponse
-  ): Promise<T> {
+  public static error<T>(response: Response | NativeErrorResponse): Promise<T> {
     if ('isNativeError' in response && response.isNativeError) {
-      return response.json().then((error: native.Error) => {
+      return response.json().then((error: NativeError) => {
         logger.error('Request failed:', error.message);
 
         return Promise.reject(error);

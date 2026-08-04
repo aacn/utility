@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.6.0] - 2026-08-04
+
+### Added
+
+- Added `@native-systems/utility/pattern` with ESM, CommonJS, and TypeScript declaration entry points.
+- Added package-entry, export-map, browser-safety, and type-resolution coverage.
+
+### Changed
+
+- Kept the root entry point browser-safe by moving Handlebars-dependent pattern APIs to the dedicated `pattern` entry point.
+
+### Fixed
+
+- Removed duplicate declarations from the generated type definitions and enabled strict declaration validation.
+
 ## [2.5.2] - 2026-03-16
 
 ### Added
