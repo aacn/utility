@@ -3,7 +3,7 @@ export * from './Logger';
 export * from './HttpHandler';
 export * from './CookieHelper';
 export * from './UrlTemplate';
-export * from './PatternCompiler';
+export { DateFormatter } from './PatternCompiler/Plugin/DateFormatter';
 export * from './generatePrefix';
 export * from './LabelMapper';
 export * from './FormSanitizer';
